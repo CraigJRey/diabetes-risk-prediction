@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Diabetes Risk Estimator</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+    <header>
+
+        <h1>Diabetes Risk Estimator</h1>
+
+        <p class="subtitle">
+            Created By: <strong>Craig Reynolds</strong><br>
+            Explore how demographic, behavioral, and physical
+            characteristics influence estimated diabetes probability.
+        </p>
+
+        <nav>
+            <a href="{{ url_for('home') }}">Estimator</a>
+            <a href="{{ url_for('about') }}">About the Model</a>
+        </nav>
+
+    </header>
+
+
+    <form action="{{ url_for('predict') }}"
+          method="POST"
+          class="prediction-form">
+
+
+        <!-- Age -->
+
+        <div class="input-group">
+
+            <label for="age">
+                Age:
+                <span id="ageValue">45</span>
+            </label>
+
+            <input type="range"
+                   id="age"
+                   name="age"
+                   min="18"
+                   max="80"
+                   step="1"
+                   value="45">
+
+            <div class="slider-ticks">
+    <span style="left: 0.5%;">18</span>
+    <span style="left: 20.25%;">30</span>
+    <span style="left: 36%;">40</span>
+    <span style="left: 51.6%;">50</span>
+    <span style="left: 67.7%;">60</span>
+    <span style="left: 83%;">70</span>
+    <span style="left: 100%;">80+</span>
+</div>
+
+        </div>
+
+
+        <!-- Sex -->
+
+        <div class="input-group">
+
+            <label for="sex">Sex</label>
+
+            <select id="sex" name="sex">
+
+                <option value="M">Male</option>
+                <option value="F">Female</option>
+
+            </select>
+
+        </div>
+
+
+        <!-- Race -->
+
+        <div class="input-group">
+
+            <label for="race">
+                Race / Ethnicity
+            </label>
+
+            <select id="race" name="race">
+
+                <option value="White">White</option>
+                <option value="Black">Black</option>
+                <option value="Hispanic">Hispanic</option>
+                <option value="Asian">Asian</option>
+                <option value="Other">Other</option>
+
+            </select>
+
+        </div>
+
+
+        <!-- Household Income -->
+
+        <div class="input-group">
+
+            <label for="household_income">
+                Annual Household Income:
+                $<span id="incomeValue">60,000</span>
+            </label>
+
+            <input type="range"
+                   id="household_income"
+                   name="household_income"
+                   min="0"
+                   max="200000"
+                   step="1000"
+                   value="60000">
+
+            <div class="slider-ticks">
+               <span style="left: 0%;">$0</span>
+    <span style="left: 26%;">$50K</span>
+    <span style="left: 50%;">$100K</span>
+    <span style="left: 74.5%;">$150K</span>
+    <span style="left: 100%;">$200K</span>
+            </div>
+
+        </div>
+
+
+        <!-- Household Size -->
+
+        <div class="input-group">
+
+            <label for="household_size">
+                Number of People in Household
+            </label>
+
+            <select id="household_size"
+                    name="household_size">
+
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+
+            </select>
+
+        </div>
+
+
+        <!-- Height -->
+
+        <div class="input-group">
+
+            <label for="height">
+                Height:
+                <span id="heightValue">5'8"</span>
+            </label>
+
+            <input type="range"
+                   id="height"
+                   name="height"
+                   min="54"
+                   max="84"
+                   step="1"
+                   value="68">
+
+            <div class="slider-ticks">
+    <span style="left: 0%;">4'6"</span>
+    <span style="left: 21%;">5'0"</span>
+    <span style="left: 40.5%;">5'6"</span>
+    <span style="left: 60%;">6'0"</span>
+    <span style="left: 79.5%;">6'6"</span>
+    <span style="left: 100%;">7'0"</span>
+</div>
+
+        </div>
+
+
+        <!-- Weight -->
+
+        <div class="input-group">
+
+            <label for="weight">
+                Weight:
+                <span id="weightValue">170</span> lbs
+            </label>
+
+            <input type="range"
+                   id="weight"
+                   name="weight"
+                   min="80"
+                   max="500"
+                   step="1"
+                   value="170">
+
+            <div class="slider-ticks">
+               <span style="left: 0%;">80 lbs</span>
+    <span style="left: 17.5%;">150 lbs</span>
+    <span style="left: 40.5%;">250 lbs</span>
+    <span style="left: 64.3%;">350 lbs</span>
+    <span style="left: 100%;">500 lbs</span>
+            </div>
+
+        </div>
+
+
+        <!-- Calculated BMI -->
+
+        <div class="bmi-display">
+
+            Calculated BMI:
+            <strong id="bmiValue">25.8</strong>
+
+        </div>
+
+
+        <!-- Smoking -->
+
+        <div class="input-group">
+
+            <label for="smoked_100">
+                Have you smoked at least 100 cigarettes
+                in your lifetime?
+            </label>
+
+            <select id="smoked_100"
+                    name="smoked_100">
+
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+
+            </select>
+
+        </div>
+
+
+        <!-- Heavy Drinking -->
+
+        <div class="input-group">
+
+            <label for="drank_heavily">
+                Have you ever consumed 4 or more alcoholic drinks per day
+                everyday?
+            </label>
+
+            <select id="drank_heavily"
+                    name="drank_heavily">
+
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+
+            </select>
+
+        </div>
+
+
+        <!-- Weekly Exercise -->
+
+        <div class="input-group">
+
+            <label for="weekly_exercise">
+                Exercise Sessions per Week:
+                <span id="exerciseValue">2</span>
+            </label>
+
+            <input type="range"
+                   id="weekly_exercise"
+                   name="weekly_exercise"
+                   min="0"
+                   max="14"
+                   step="1"
+                   value="2">
+
+           <div class="slider-ticks">
+               <span style="left: 1%;">0</span>
+    <span style="left: 15.3%;">2</span>
+    <span style="left: 29.3%;">4</span>
+    <span style="left: 50%;">7</span>
+    <span style="left: 71.4%;">10</span>
+    <span style="left: 100%;">14</span>
+            </div>
+
+        </div>
+
+
+        <!-- Sedentary Time -->
+
+        <div class="input-group">
+
+            <label for="sedentary_hours">
+                Sedentary Time per Day:
+                <span id="sedentaryValue">5</span> hours
+            </label>
+
+            <input type="range"
+                   id="sedentary_hours"
+                   name="sedentary_hours"
+                   min="0"
+                   max="20"
+                   step="0.5"
+                   value="5">
+
+            <div class="slider-ticks">
+               <span style="left: 1%;">0h</span>
+    <span style="left: 11%;">2h</span>
+    <span style="left: 21%;">4h</span>
+    <span style="left: 31%;">6h</span>
+    <span style="left: 40.5%;">8h</span>
+    <span style="left: 50.5%;">10h</span>
+    <span style="left: 60%;">12h</span>
+    <span style="left: 80%;">16h</span>
+    <span style="left: 100%;">20h</span>
+            </div>
+
+        </div>
+
+
+        <button type="submit">
+            Calculate Probability
+        </button>
+
+    </form>
+
+
+    <p class="disclaimer">
+
+        This application is an educational machine-learning
+        demonstration and is not a medical diagnosis or
+        clinical decision-making tool.
+
+    </p>
+
+</div>
+
+
+<script>
+
+    const age =
+        document.getElementById("age");
+
+    const householdIncome =
+        document.getElementById("household_income");
+
+    const height =
+        document.getElementById("height");
+
+    const weight =
+        document.getElementById("weight");
+
+    const exercise =
+        document.getElementById("weekly_exercise");
+
+    const sedentary =
+        document.getElementById("sedentary_hours");
+
+
+    function formatHeight(totalInches) {
+
+        const feet =
+            Math.floor(totalInches / 12);
+
+        const inches =
+            totalInches % 12;
+
+        return `${feet}'${inches}"`;
+    }
+
+
+    function updateBMI() {
+
+        const heightValue =
+            parseFloat(height.value);
+
+        const weightValue =
+            parseFloat(weight.value);
+
+        const bmi =
+            (weightValue * 703) /
+            (heightValue * heightValue);
+
+        document
+            .getElementById("bmiValue")
+            .textContent =
+            bmi.toFixed(1);
+    }
+
+
+    function updateValues() {
+
+        document
+            .getElementById("ageValue")
+            .textContent =
+            age.value;
+
+
+        document
+            .getElementById("incomeValue")
+            .textContent =
+            Number(
+                householdIncome.value
+            ).toLocaleString();
+
+
+        document
+            .getElementById("heightValue")
+            .textContent =
+            formatHeight(
+                parseInt(height.value)
+            );
+
+
+        document
+            .getElementById("weightValue")
+            .textContent =
+            weight.value;
+
+
+        document
+            .getElementById("exerciseValue")
+            .textContent =
+            exercise.value;
+
+
+        document
+            .getElementById("sedentaryValue")
+            .textContent =
+            sedentary.value;
+
+
+        updateBMI();
+    }
+
+
+    age.addEventListener(
+        "input",
+        updateValues
+    );
+
+    householdIncome.addEventListener(
+        "input",
+        updateValues
+    );
+
+    height.addEventListener(
+        "input",
+        updateValues
+    );
+
+    weight.addEventListener(
+        "input",
+        updateValues
+    );
+
+    exercise.addEventListener(
+        "input",
+        updateValues
+    );
+
+    sedentary.addEventListener(
+        "input",
+        updateValues
+    );
+
+
+    updateValues();
+
+</script>
+
+
+</body>
+
+</html>

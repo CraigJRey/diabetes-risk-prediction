@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>About the Diabetes Risk Model</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+    <header>
+
+        <h1>About the Model</h1>
+
+        <p style="font-size: 1.2rem;">
+       Project designed and developed by: <strong> Craig Reynolds</strong>
+    </p>
+
+
+        <nav>
+            <a href="{{ url_for('home') }}">Estimator</a>
+            <a href="{{ url_for('about') }}">About the Model</a>
+        </nav>
+
+    </header>
+
+
+    <section>
+
+        <h2>Project Overview</h2>
+
+        <p> 
+            This application demonstrates the deployment of a
+            machine-learning model developed to estimate one's probability
+            of having either diabetes or borderline diabetes status using demographic, socioeconomic, behavioral,
+            and physical characteristics. The result indicates one's probability at that point in time rather than the probability of developing diabetes over their lifetime.
+        </p>
+
+        <p>
+            This model was developed using data from the National Health
+            and Nutrition Examination Survey (NHANES). Multiple machine-
+            learning approaches were evaluated before Gradient Boosting
+            was selected as the final model.
+        </p>
+
+    </section>
+
+
+    <section>
+
+        <h2>Model Inputs</h2>
+
+        <p>
+            The model uses the following characteristics:
+        </p>
+
+        <ul>
+            <li>Age</li>
+            <li>Sex</li>
+            <li>Race / ethnicity</li>
+            <li>Income relative to poverty line</li>
+            <li>Body mass index</li>
+            <li>Smoking history</li>
+            <li>Heavy alcohol use</li>
+            <li>Weekly exercise frequency</li>
+            <li>Daily sedentary time</li>
+        </ul>
+
+        <p>
+            The Flask application converts user-friendly inputs such as height,
+            weight, household income, and household size into the model
+            features required for prediction.
+        </p>
+
+    </section>
+
+
+    <section>
+
+        <h2>Final Model</h2>
+
+        <p>
+            The final model is a fine-tuned Gradient Boosting Classifier.
+            Hyperparameters were selected using a grid search and cross-validation 
+            with the training data.
+        </p>
+
+
+        <table>
+
+            <tr>
+                <th>Hyperparameter</th>
+                <th>Selected Value</th>
+            </tr>
+
+            <tr>
+                <td>Number of Estimators</td>
+                <td>250</td>
+            </tr>
+
+            <tr>
+                <td>Learning Rate</td>
+                <td>0.06</td>
+            </tr>
+
+            <tr>
+                <td>Maximum Tree Depth</td>
+                <td>1</td>
+            </tr>
+
+            <tr>
+                <td>Minimum Samples per Leaf</td>
+                <td>2</td>
+            </tr>
+
+            <tr>
+                <td>Subsample</td>
+                <td>0.8</td>
+            </tr>
+
+        </table>
+
+    </section>
+
+
+    <section>
+
+        <h2>Final Test Performance</h2>
+
+
+        <table>
+
+            <tr>
+                <th>Metric</th>
+                <th>Score</th>
+            </tr>
+
+            <tr>
+                <td>ROC AUC</td>
+                <td>0.780</td>
+            </tr>
+
+            <tr>
+                <td>Log Loss</td>
+                <td>0.371</td>
+            </tr>
+
+            <tr>
+                <td>Brier Score</td>
+                <td>0.115</td>
+            </tr>
+
+        </table>
+
+
+        <p>
+            The final model showed moderate discriminatory ability and
+            reasonably strong probability calibration on the held-out
+            test set. The predicted probability was within 2 percentage 
+            points of the observed probability for 97.4% of observations.
+        </p>
+
+    </section>
+
+
+    <section>
+
+        <h2>Deployment</h2>
+
+        <p>
+            The preprocessing steps required for inference and the fitted
+            Gradient Boosting model were combined into a scikit-learn
+            pipeline and serialized using Joblib.
+        </p>
+
+        <p>
+            Flask loads this pipeline and converts the information
+            submitted through the estimator into a pandas DataFrame.
+            The pipeline then preprocesses the values and generates the
+            estimated probability of diabetes.
+        </p>
+
+    </section>
+
+
+    <section>
+
+        <h2>Important Limitation</h2>
+
+        <p>
+            This application is a data-science portfolio project and is
+            not a medical device or validated clinical prediction tool.
+            Predictions should not be used to diagnose diabetes or make
+            healthcare decisions.
+        </p>
+
+    </section>
+
+
+    <a href="{{ url_for('home') }}"
+       class="button-link">
+
+        Return to Estimator
+
+    </a>
+
+</div>
+
+</body>
+
+</html>

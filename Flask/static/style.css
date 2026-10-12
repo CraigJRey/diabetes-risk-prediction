@@ -1,0 +1,350 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f4f6f8;
+    color: #222;
+    margin: 0;
+    line-height: 1.6;
+}
+
+
+.container {
+    width: 90%;
+    max-width: 850px;
+    margin: 40px auto;
+    background-color: white;
+    padding: 35px;
+    border-radius: 12px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+}
+
+
+header {
+    margin-bottom: 30px;
+}
+
+
+h1 {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+
+h2 {
+    margin-top: 35px;
+    margin-bottom: 15px;
+}
+
+
+.subtitle {
+    color: #555;
+    margin-bottom: 20px;
+}
+
+
+nav {
+    margin-top: 20px;
+}
+
+
+nav a {
+    margin-right: 20px;
+    text-decoration: none;
+    font-weight: bold;
+    color: #2d5f8b;
+}
+
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+
+/* -------------------------------- */
+/* Form sections                    */
+/* -------------------------------- */
+
+.input-group {
+    margin-bottom: 28px;
+}
+
+
+.input-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+
+/* -------------------------------- */
+/* Sliders                          */
+/* -------------------------------- */
+
+input[type="range"] {
+    width: 100%;
+}
+
+
+/*
+Slider labels are positioned manually
+according to the actual value represented
+on the slider.
+*/
+
+.slider-ticks {
+    position: relative;
+    height: 24px;
+    margin-top: 5px;
+    font-size: 0.78rem;
+    color: #666;
+}
+
+
+.slider-ticks span {
+    position: absolute;
+    transform: translateX(-50%);
+    white-space: nowrap;
+}
+
+
+/*
+Prevent the first and last labels from
+hanging outside the ends of the slider.
+*/
+
+.slider-ticks span:first-child {
+    transform: translateX(0);
+}
+
+
+.slider-ticks span:last-child {
+    transform: translateX(-100%);
+}
+
+
+/* -------------------------------- */
+/* Dropdown menus                   */
+/* -------------------------------- */
+
+select {
+    width: 22%;
+    min-width: 150px;
+    padding: 8px 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: white;
+}
+
+
+/* -------------------------------- */
+/* BMI display                      */
+/* -------------------------------- */
+
+.bmi-display {
+    padding: 16px;
+    margin-bottom: 28px;
+    background-color: #eef3f7;
+    border-radius: 8px;
+    font-size: 1.1rem;
+}
+
+
+/* -------------------------------- */
+/* Buttons                          */
+/* -------------------------------- */
+
+button {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 7px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: #2d5f8b;
+    color: white;
+}
+
+
+button:hover {
+    opacity: 0.9;
+}
+
+
+.button-link {
+    display: inline-block;
+    padding: 12px 20px;
+    border-radius: 7px;
+    text-decoration: none;
+    font-weight: bold;
+    background-color: #2d5f8b;
+    color: white;
+}
+
+
+.button-link:hover {
+    opacity: 0.9;
+}
+
+
+/* -------------------------------- */
+/* Prediction result                */
+/* -------------------------------- */
+
+.prediction-card {
+    margin: 35px 0;
+    padding: 25px;
+    background-color: #f6f8fa;
+    border-radius: 10px;
+}
+
+
+.result-label {
+    text-align: center;
+    font-weight: bold;
+}
+
+
+.prediction-result {
+    font-size: 4rem;
+    font-weight: bold;
+    text-align: center;
+    margin: 20px 0;
+}
+
+
+.probability-bar {
+    width: 100%;
+    height: 24px;
+    background-color: #ddd;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+
+.probability-fill {
+    height: 100%;
+    background-color: #2d5f8b;
+}
+
+
+.probability-scale {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+    font-size: 0.8rem;
+    color: #666;
+}
+
+
+/* -------------------------------- */
+/* Submitted profile                */
+/* -------------------------------- */
+
+.profile-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+}
+
+
+.profile-item {
+    padding: 15px;
+    background-color: #f6f8fa;
+    border-radius: 7px;
+}
+
+
+.profile-item strong {
+    display: block;
+    margin-bottom: 5px;
+}
+
+
+.result-actions {
+    margin-top: 30px;
+}
+
+
+/* -------------------------------- */
+/* Tables                           */
+/* -------------------------------- */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+
+th,
+td {
+    text-align: left;
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+}
+
+
+th {
+    background-color: #f0f3f6;
+}
+
+
+/* -------------------------------- */
+/* General sections                 */
+/* -------------------------------- */
+
+section {
+    margin-bottom: 30px;
+}
+
+
+.disclaimer {
+    margin-top: 35px;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+    font-size: 0.85rem;
+    color: #666;
+}
+
+
+/* -------------------------------- */
+/* Mobile                           */
+/* -------------------------------- */
+
+@media (max-width: 600px) {
+
+    .container {
+        width: auto;
+        margin: 15px;
+        padding: 20px;
+    }
+
+
+    /*
+    Dropdowns become wider on a phone
+    so they remain easy to use.
+    */
+
+    select {
+        width: 100%;
+        min-width: 0;
+    }
+
+
+    .profile-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .prediction-result {
+        font-size: 3rem;
+    }
+
+
+    .slider-ticks {
+        font-size: 0.68rem;
+    }
+
+}
